@@ -127,6 +127,7 @@ int do_exit(long code)
 	if (current->leader)
 		kill_session();
 	current->state = TASK_ZOMBIE;
+	fprintk(3, "%ld\t%c\t%ld\n", current->pid, 'E', jiffies); 
 	current->exit_code = code;
 	tell_father(current->father);
 	schedule();
